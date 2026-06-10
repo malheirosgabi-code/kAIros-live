@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kAIrós — Materiais</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;500;600;700&display=swap">
+<style>
+:root {
+  --bg: oklch(0.985 0.02 155);
+  --bg-2: oklch(0.975 0.015 150);
+  --secondary: oklch(0.94 0.015 145);
+  --muted: oklch(0.92 0.01 145);
+  --muted-fg: oklch(0.55 0.04 150);
+  --fg: oklch(0.22 0.03 155);
+  --fg-soft: oklch(0.35 0.04 152);
+  --border: oklch(0.85 0.02 145);
+  --accent: oklch(0.72 0.18 150);
+  --accent-soft: oklch(0.92 0.09 145);
+
+  --display: "Crimson Pro", ui-serif, Georgia, serif;
+  --body: "Inter", ui-sans-serif, system-ui, sans-serif;
+
+  --radius: 14px;
+  --radius-lg: 22px;
+  --shadow: 0 30px 80px -40px oklch(0.3 0.05 150 / 0.25);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--body);
+  font-size: 15px;
+  font-feature-settings: "ss01","cv11";
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 24px;
+}
+
+h1, h2, .display { font-family: var(--display); letter-spacing: -0.01em; font-weight: 700; }
+em { font-style: italic; color: var(--accent); font-weight: 600; }
+
+.page {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+/* LOGO */
+.logo {
+  font-family: var(--display);
+  font-size: 72px;
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-align: center;
+}
+.logo em { color: var(--accent); font-style: italic; }
+
+/* QUOTE */
+.quote {
+  font-family: var(--display);
+  font-size: 17px;
+  font-style: italic;
+  color: var(--fg-soft);
+  line-height: 1.65;
+  width: 100%;
+  padding: 18px 22px 18px 26px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  position: relative;
+  overflow: hidden;
+}
+.quote::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: var(--accent);
+}
+
+/* LINKS */
+.links {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+}
+
+.link-card {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 22px;
+  background: var(--bg-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  text-decoration: none;
+  color: var(--fg);
+  transition: all 0.15s;
+  box-shadow: var(--shadow);
+}
+.link-card:hover {
+  border-color: var(--accent);
+  background: var(--accent-soft);
+  transform: translateY(-2px);
+}
+
+.link-icon {
+  font-size: 22px;
+  flex-shrink: 0;
+  width: 48px;
+  height: 48px;
+  background: var(--bg);
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border);
+}
+
+.link-text { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+
+.link-name {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.2;
+}
+.link-desc {
+  font-size: 12px;
+  color: var(--muted-fg);
+  line-height: 1.4;
+}
+
+.link-arrow {
+  font-size: 16px;
+  color: var(--accent);
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+/* FOOTER */
+.footer {
+  font-size: 11px;
+  color: var(--muted-fg);
+  text-align: center;
+  line-height: 1.8;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 480px) {
+  .logo { font-size: 54px; }
+  .quote { font-size: 15px; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="logo">kAI<em>rós</em></div>
+
+  <div class="quote">
+    "O que buscamos: parceiros que acreditem que tecnologia pode fortalecer — não substituir — o cuidado humano."
+  </div>
+
+  <div class="links">
+
+    <a class="link-card" href="https://liderkairos.lovable.app" target="_blank">
+      <div class="link-icon">🚀</div>
+      <div class="link-text">
+        <div class="link-name">Site do produto</div>
+        <div class="link-desc">liderkairos.lovable.app</div>
+      </div>
+      <div class="link-arrow">↗</div>
+    </a>
+
+    <a class="link-card" href="https://malheirosgabi-code.github.io/kAIros-live/kairos_pitch_v11.html" target="_blank">
+      <div class="link-icon">🎤</div>
+      <div class="link-text">
+        <div class="link-name">Pitch</div>
+        <div class="link-desc">Apresentação completa com roteiro</div>
+      </div>
+      <div class="link-arrow">↗</div>
+    </a>
+
+    <a class="link-card" href="https://malheirosgabi-code.github.io/kAIros-live/kairos_canvas_v5.html" target="_blank">
+      <div class="link-icon">🗺️</div>
+      <div class="link-text">
+        <div class="link-name">Canvas do Produto</div>
+        <div class="link-desc">Problema · Solução · P&L · Precificação · GTM</div>
+      </div>
+      <div class="link-arrow">↗</div>
+    </a>
+
+  </div>
+
+  <div class="footer">
+    AI Product Leaders · Tera 2026<br>
+    Gabriela · João · Michele · Pedro · Susane
+  </div>
+
+</div>
+</body>
+</html>
