@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>kAIrós — Product Canvas v5</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&display=swap');
+
+:root {
+  --ink:#0f0e0b;
+  --paper:#faf8f4;
+  --paper2:#f2efe8;
+  --border:#e0dbd0;
+  --muted:#8a8577;
+  --accent:#2d7a4f;
+  --accent2:#3fa06a;
+  --red:#c0392b;
+  --red-bg:#fdf1f0;
+  --red-border:#f5c6c2;
+  --green:#1a6b3a;
+  --green-bg:#f0f7f3;
+  --green-border:#a8d5bc;
+  --blue:#1a3f6b;
+  --blue-bg:#eef3f9;
+  --blue-border:#a8c0d8;
+  --amber:#8a5c0a;
+  --amber-bg:#fdf6ec;
+  --amber-border:#e8c97a;
+  --purple:#5a2d82;
+  --purple-bg:#f5f0fb;
+  --purple-border:#c9aae8;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:'DM Sans',sans-serif;font-size:14px;line-height:1.7}
+
+/* ── NAV ── */
+.nav{background:var(--ink);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:56px;position:sticky;top:0;z-index:200;border-bottom:1px solid rgba(255,255,255,.06)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:900;color:#fff;letter-spacing:-.5px}
+.nav-logo em{color:var(--accent2);font-style:italic}
+.nav-tabs{display:flex;gap:2px}
+.nav-tab{padding:7px 18px;border-radius:6px;font-size:12px;font-weight:500;color:rgba(255,255,255,.45);cursor:pointer;border:none;background:transparent;transition:all .2s;letter-spacing:.3px}
+.nav-tab:hover{color:rgba(255,255,255,.8)}
+.nav-tab.active{background:rgba(255,255,255,.1);color:#fff}
+.nav-badge{font-size:10px;color:rgba(255,255,255,.3);letter-spacing:.5px}
+
+/* ── SECTIONS ── */
+.section{display:none;padding:48px 40px;max-width:1160px;margin:0 auto}
+.section.active{display:block}
+
+/* ── CHAPTER HEADER ── */
+.chapter{margin-bottom:48px}
+.chapter-eyebrow{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:10px}
+.chapter-title{font-family:'Playfair Display',serif;font-size:42px;font-weight:900;line-height:1.1;color:var(--ink)}
+.chapter-title em{color:var(--accent);font-style:italic}
+.chapter-sub{font-size:15px;color:var(--muted);margin-top:12px;max-width:600px;line-height:1.7}
+
+/* ── PULL QUOTE ── */
+.pullquote{border-left:3px solid var(--accent);padding:20px 28px;margin:32px 0;background:var(--paper2);border-radius:0 10px 10px 0}
+.pullquote-text{font-family:'Playfair Display',serif;font-size:22px;font-style:italic;line-height:1.5;color:var(--ink)}
+.pullquote-source{font-size:11px;color:var(--muted);margin-top:10px;text-transform:uppercase;letter-spacing:1px}
+
+/* ── STAT BAND ── */
+.stat-band{background:var(--ink);border-radius:14px;padding:32px 36px;margin:32px 0;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;overflow:hidden}
+.stat-band-divider{background:rgba(255,255,255,.08);width:1px}
+.stat-item{padding:0 28px;text-align:center}
+.stat-item:first-child{padding-left:0}
+.stat-item:last-child{padding-right:0}
+.stat-val{font-family:'Playfair Display',serif;font-size:40px;font-weight:900;color:var(--accent2);line-height:1}
+.stat-val-small{font-size:28px}
+.stat-label{font-size:11px;color:rgba(255,255,255,.45);margin-top:8px;line-height:1.5;text-transform:uppercase;letter-spacing:.5px}
+
+/* ── CARDS ── */
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.span2{grid-column:span 2}
+.span3{grid-column:span 3}
+.card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px 26px}
+.card-eyebrow{font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1.5px;color:var(--muted);margin-bottom:14px}
+.card-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:14px;line-height:1.3}
+.divider{height:1px;background:var(--border);margin:14px 0}
+.row{padding:9px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.5}
+.row:last-child{border-bottom:none}
+.row strong{font-weight:500}
+
+/* ── DOR DO MARCELO ── */
+.pain-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:24px 0}
+.pain-card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 22px;position:relative;overflow:hidden}
+.pain-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--red)}
+.pain-number{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--border);line-height:1;margin-bottom:8px}
+.pain-title{font-size:13px;font-weight:500;margin-bottom:6px;color:var(--ink)}
+.pain-body{font-size:12px;color:var(--muted);line-height:1.6}
+.pain-consequence{font-size:11px;margin-top:10px;padding:8px 12px;background:var(--red-bg);border-radius:6px;color:var(--red);font-weight:500}
+
+/* ── HIPÓTESES ── */
+.hypo-list{display:flex;flex-direction:column;gap:14px;margin:24px 0}
+.hypo{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 24px;display:grid;grid-template-columns:auto 1fr auto;gap:20px;align-items:start}
+.hypo-num{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--border);line-height:1;padding-top:4px}
+.hypo-q{font-size:14px;font-weight:500;line-height:1.5;margin-bottom:6px}
+.hypo-body{font-size:12px;color:var(--muted);line-height:1.6}
+.hypo-metric{font-size:11px;padding:5px 12px;border-radius:20px;white-space:nowrap;font-weight:500;margin-top:4px;align-self:start}
+.hm-pending{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+.hm-validated{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+
+/* ── PROPOSTA DE VALOR ── */
+.value-trio{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:24px 0}
+.value-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;text-align:center;display:flex;flex-direction:column;align-items:center}
+.value-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;margin-bottom:16px}
+.vi-amber{background:var(--amber-bg)}
+.vi-blue{background:var(--blue-bg)}
+.vi-green{background:var(--green-bg)}
+.value-result{font-family:'Playfair Display',serif;font-size:28px;font-weight:900;line-height:1;margin-bottom:6px}
+.value-label{font-size:12px;color:var(--muted);line-height:1.5}
+.value-detail{font-size:11px;margin-top:12px;padding:8px 12px;background:var(--paper2);border-radius:8px;text-align:left;line-height:1.6;width:100%}
+
+/* ── MVP FEATURE LIST ── */
+.mvp-table{width:100%;border-collapse:collapse;font-size:13px}
+.mvp-table th{text-align:left;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:10px 14px;border-bottom:2px solid var(--border)}
+.mvp-table td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:top;line-height:1.5}
+.mvp-table tr:last-child td{border-bottom:none}
+.mvp-table .done{background:var(--green-bg)}
+.mvp-table .cycle2{background:var(--amber-bg)}
+.tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 9px;border-radius:20px;white-space:nowrap}
+.tag-done{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.tag-c2{background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)}
+.tag-c3{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+
+/* ── MÉTRICAS ── */
+.metrics-split{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.metric-group-title{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);padding:10px 0 8px;border-bottom:2px solid var(--ink);margin-bottom:14px}
+.metric-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid var(--border)}
+.metric-row:last-child{border-bottom:none}
+.metric-name{font-size:13px;font-weight:400}
+.metric-target{font-family:'Playfair Display',serif;font-size:18px;font-weight:700}
+.metric-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* ── P&L ── */
+.pl-table{width:100%;border-collapse:collapse;font-size:13px}
+.pl-table th{text-align:right;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);padding:10px 14px;border-bottom:2px solid var(--border)}
+.pl-table th:first-child{text-align:left}
+.pl-table td{padding:10px 14px;border-bottom:1px solid var(--border);text-align:right;font-variant-numeric:tabular-nums}
+.pl-table td:first-child{text-align:left}
+.pl-table tr:last-child td{border-bottom:none}
+.pl-head{background:var(--ink);color:#fff!important;font-family:'Playfair Display',serif;font-size:11px;font-weight:700;letter-spacing:.5px}
+.pl-head td{color:#fff!important;padding:7px 14px;border-bottom:none}
+.pl-total td{font-weight:600;background:var(--paper2)}
+.pl-margin td{font-family:'Playfair Display',serif;font-size:15px;font-weight:700}
+.num-red{color:var(--red)}
+.num-green{color:var(--green)}
+.num-blue{color:var(--blue)}
+
+/* ── PRICING ── */
+.plan-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:24px 0}
+.plan{background:#fff;border:1px solid var(--border);border-radius:14px;padding:26px;display:flex;flex-direction:column}
+.plan.featured{border:2px solid var(--ink);position:relative}
+.plan-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;font-size:10px;font-weight:600;padding:3px 14px;border-radius:20px;letter-spacing:.5px;text-transform:uppercase;white-space:nowrap}
+.plan-tier{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin-bottom:6px}
+.plan-name{font-family:'Playfair Display',serif;font-size:22px;font-weight:900;margin-bottom:4px}
+.plan-desc{font-size:12px;color:var(--muted);margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border);line-height:1.5}
+.plan-price{font-family:'Playfair Display',serif;font-size:36px;font-weight:900;line-height:1}
+.plan-price sup{font-size:14px;font-weight:400;vertical-align:top;margin-top:8px;display:inline-block}
+.plan-price sub{font-size:12px;font-weight:400;color:var(--muted)}
+.plan-cap{font-size:11px;color:var(--muted);margin-top:4px;margin-bottom:18px;padding-bottom:18px;border-bottom:1px solid var(--border)}
+.plan-features{flex:1;display:flex;flex-direction:column;gap:0}
+.pf{font-size:12px;padding:7px 0;border-bottom:1px solid var(--border);display:flex;gap:8px;line-height:1.4;align-items:flex-start}
+.pf:last-child{border-bottom:none}
+.pf-check{color:var(--green);font-weight:700;flex-shrink:0;margin-top:1px}
+.pf-x{color:#ccc;flex-shrink:0;margin-top:1px}
+.plan-margin{margin-top:18px;padding:8px 14px;border-radius:8px;text-align:center;font-size:12px;font-weight:500}
+
+/* ── UPGRADE FLOW ── */
+.upgrade-flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:0;align-items:center;margin:24px 0;background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.uf-node{padding:24px 20px;text-align:center}
+.uf-arrow{font-size:20px;color:var(--border);text-align:center}
+.uf-plan{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;margin-bottom:6px}
+.uf-trigger{font-size:11px;color:var(--muted);line-height:1.5}
+.uf-trigger strong{color:var(--ink);font-weight:500;display:block;margin-bottom:2px}
+
+/* ── GTM ── */
+.gtm-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.gtm-phase{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.gtm-head{background:var(--ink);padding:16px 22px;display:flex;align-items:center;justify-content:space-between}
+.gtm-phase-name{font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff}
+.gtm-phase-meta{font-size:11px;color:rgba(255,255,255,.4)}
+.gtm-body{padding:18px 22px}
+.gtm-section-label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:14px 0 6px}
+.gtm-section-label:first-child{margin-top:0}
+.gtm-item{font-size:12px;padding:5px 0;border-bottom:1px solid var(--border);line-height:1.4;color:var(--ink)}
+.gtm-item:last-child{border-bottom:none}
+.cac-box{background:var(--paper2);border:1px solid var(--border);border-radius:10px;padding:16px 20px;margin-top:16px;font-size:12px;line-height:1.7}
+.cac-box strong{font-weight:500}
+
+/* ── POSICIONAMENTO ── */
+.position-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:24px 0}
+.pos-item{padding:8px 0;border-bottom:1px solid var(--border);font-size:13px;line-height:1.5}
+.pos-item:last-child{border-bottom:none}
+
+/* ── NOTE ── */
+.note{background:var(--amber-bg);border:1px solid var(--amber-border);border-radius:8px;padding:12px 16px;font-size:12px;color:var(--amber);margin-top:14px;line-height:1.6}
+.note strong{font-weight:500}
+
+/* ── FOOTER ── */
+.footer{text-align:center;padding:40px;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:48px}
+
+@media(max-width:900px){
+  .grid2,.grid3,.pain-grid,.value-trio,.metrics-split,.plan-row,.gtm-grid,.position-grid{grid-template-columns:1fr}
+  .stat-band{grid-template-columns:1fr 1fr}
+  .span2,.span3{grid-column:span 1}
+  .upgrade-flow{grid-template-columns:1fr;text-align:center}
+  .uf-arrow{transform:rotate(90deg)}
+  .section{padding:24px 20px}
+  .chapter-title{font-size:30px}
+  .hypo{grid-template-columns:auto 1fr}
+  .hypo-metric{grid-column:2;margin-left:0}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-logo">kAI<em>rós</em></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="show('problem',this)">O Problema</button>
+    <button class="nav-tab" onclick="show('solution',this)">A Solução</button>
+    <button class="nav-tab" onclick="show('pnl',this)">P&L</button>
+    <button class="nav-tab" onclick="show('pricing',this)">Planos</button>
+    <button class="nav-tab" onclick="show('gtm',this)">GTM</button>
+  </div>
+  <div class="nav-badge">Canvas v4 · Mai 2026</div>
+</nav>
+
+
+<!-- ═══════════════════════════════════════════
+     ABA 1 — O PROBLEMA
+═══════════════════════════════════════════ -->
+<div id="problem" class="section active">
+
+  <div class="chapter">
+    <div class="chapter-eyebrow">Capítulo 1 de 5 — O Problema</div>
+    <div class="chapter-title">A Igreja perde pessoas<br>em <em>silêncio.</em></div>
+    <div class="chapter-sub">Não por brigas. Não por teologia. Por falta de quem perceba que elas estão indo embora — antes que vão.</div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:24px 0 0">
+      <div style="padding:16px;background:var(--paper2);border:1px solid var(--border);border-radius:10px">
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:4px">400k+</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.4">igrejas cristãs no Brasil — 180k formais, ~220k informais</div>
+      </div>
+      <div style="padding:16px;background:var(--paper2);border:1px solid var(--border);border-radius:10px">
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:4px">1,2M+</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.4">líderes cristãos estimados — ao menos 3 por igreja</div>
+      </div>
+      <div style="padding:16px;background:var(--paper2);border:1px solid var(--border);border-radius:10px">
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:4px">~50M</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.4">igrejados ativos no Brasil</div>
+      </div>
+      <div style="padding:16px;background:var(--red-bg);border:1px solid var(--red-border);border-radius:10px">
+        <div style="font-family:'Playfair Display',serif;font-size:28px;font-weight:900;color:var(--red);line-height:1;margin-bottom:4px">0</div>
+        <div style="font-size:11px;color:var(--muted);line-height:1.4">ferramentas construídas especificamente para essa dor</div>
+      </div>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:8px">Fontes: IBGE Censo 2022 · Datafolha 2023 · FGV CPDOC · estimativa conservadora de 3 líderes por igreja</div>
+  </div>
+
+  <!-- ECOSSISTEMA VISUAL -->
+  <div class="card" style="margin-bottom:20px;padding:28px 32px">
+    <div class="card-eyebrow">Contexto — Como a Igreja retém membros</div>
+    <div class="card-title">O ecossistema de cuidado pastoral</div>
+
+    <!-- SVG ECOSSISTEMA -->
+    <svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:900px;display:block;margin:16px auto 0;font-family:'DM Sans',sans-serif">
+      <defs>
+        <marker id="arr" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+          <path d="M0,0 L0,6 L8,3 z" fill="#c8b48a"/>
+        </marker>
+      </defs>
+
+      <!-- FUNDO CAMADAS -->
+      <rect x="8" y="10" width="884" height="280" rx="14" fill="#faf8f4" stroke="#e0dbd0" stroke-width="1"/>
+
+      <!-- LABEL TOPO -->
+      <text x="450" y="34" text-anchor="middle" font-size="10" fill="#8a8577" font-weight="600" letter-spacing="1.5">COMO A IGREJA CRESCE E RETÉM MEMBROS</text>
+
+      <!-- NODO: FÉ DO MEMBRO (centro esquerdo) -->
+      <rect x="32" y="100" width="150" height="100" rx="12" fill="#fff" stroke="#e0dbd0"/>
+      <text x="107" y="138" text-anchor="middle" font-size="22">🙏</text>
+      <text x="107" y="158" text-anchor="middle" font-size="12" font-weight="600" fill="#0f0e0b">Membro</text>
+      <text x="107" y="174" text-anchor="middle" font-size="10" fill="#8a8577">busca fé e pertencimento</text>
+      <text x="107" y="188" text-anchor="middle" font-size="10" fill="#8a8577">em comunidade</text>
+
+      <!-- SETA membro → canais -->
+      <line x1="182" y1="150" x2="218" y2="150" stroke="#c8b48a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- NODO: CANAIS DE ENGAJAMENTO (centro) -->
+      <rect x="220" y="45" width="200" height="215" rx="12" fill="#fff" stroke="#e0dbd0"/>
+      <text x="320" y="70" text-anchor="middle" font-size="10" fill="#8a8577" font-weight="600" letter-spacing="1">COMO A IGREJA ENGAJA</text>
+
+      <rect x="234" y="80" width="172" height="44" rx="8" fill="#f2efe8"/>
+      <text x="320" y="98" text-anchor="middle" font-size="11" fill="#0f0e0b">⛪  Cultos</text>
+      <text x="320" y="114" text-anchor="middle" font-size="10" fill="#8a8577">presença coletiva e identidade</text>
+
+      <rect x="234" y="131" width="172" height="44" rx="8" fill="#f2efe8"/>
+      <text x="320" y="149" text-anchor="middle" font-size="11" fill="#0f0e0b">🤝  Amizades na comunidade</text>
+      <text x="320" y="165" text-anchor="middle" font-size="10" fill="#8a8577">vínculos relacionais reais</text>
+
+      <rect x="234" y="182" width="172" height="62" rx="8" fill="#fff3e0" stroke="#e8c97a" stroke-width="1.5"/>
+      <text x="320" y="200" text-anchor="middle" font-size="11" font-weight="600" fill="#8a5c0a">👥  Grupos / Células</text>
+      <text x="320" y="216" text-anchor="middle" font-size="10" fill="#8a5c0a">cuidado pastoral 1:1</text>
+      <text x="320" y="230" text-anchor="middle" font-size="10" fill="#8a5c0a">+ responsabilidades na igreja</text>
+
+      <!-- SETA canais → líder -->
+      <line x1="420" y1="211" x2="458" y2="192" stroke="#c8b48a" stroke-width="1.5" marker-end="url(#arr)"/>
+      <text x="437" y="196" text-anchor="middle" font-size="9" fill="#c8b48a">cada grupo</text>
+      <text x="437" y="208" text-anchor="middle" font-size="9" fill="#c8b48a">tem um líder</text>
+
+      <!-- NODO: LÍDER (destaque) -->
+      <rect x="460" y="110" width="170" height="165" rx="12" fill="#0f0e0b" stroke="#0f0e0b"/>
+      <text x="545" y="148" text-anchor="middle" font-size="26">👤</text>
+      <text x="545" y="172" text-anchor="middle" font-size="13" font-weight="700" fill="#fff">Líder de célula</text>
+      <text x="545" y="188" text-anchor="middle" font-size="10" fill="rgba(255,255,255,.55)">voluntário · 4–6h/semana</text>
+      <text x="545" y="207" text-anchor="middle" font-size="10" fill="#d4a459">responsável pelo cuidado</text>
+      <text x="545" y="221" text-anchor="middle" font-size="10" fill="#d4a459">pastoral individual de cada</text>
+      <text x="545" y="235" text-anchor="middle" font-size="10" fill="#d4a459">membro do seu grupo</text>
+      <text x="545" y="253" text-anchor="middle" font-size="9" fill="rgba(255,255,255,.3)">~15–25 membros sob sua liderança</text>
+
+      <!-- SETA líder → resultado -->
+      <line x1="630" y1="192" x2="668" y2="175" stroke="#c8b48a" stroke-width="1.5" marker-end="url(#arr)"/>
+
+      <!-- NODO: RESULTADO — PERTENCIMENTO -->
+      <rect x="670" y="55" width="210" height="240" rx="12" fill="#fff" stroke="#e0dbd0"/>
+      <text x="775" y="80" text-anchor="middle" font-size="10" fill="#8a8577" font-weight="600" letter-spacing="1">RESULTADO PARA O MEMBRO</text>
+
+      <rect x="684" y="89" width="182" height="52" rx="8" fill="#f0f7f3" stroke="#a8d5bc" stroke-width="1"/>
+      <text x="775" y="108" text-anchor="middle" font-size="11" font-weight="600" fill="#1a6b3a">Senso de pertencimento</text>
+      <text x="775" y="123" text-anchor="middle" font-size="10" fill="#1a6b3a">é visto, acolhido, parte de algo</text>
+      <text x="775" y="136" text-anchor="middle" font-size="10" fill="#1a6b3a">maior que ele mesmo</text>
+
+      <rect x="684" y="148" width="182" height="52" rx="8" fill="#f0f7f3" stroke="#a8d5bc" stroke-width="1"/>
+      <text x="775" y="167" text-anchor="middle" font-size="11" font-weight="600" fill="#1a6b3a">Fé sustentada</text>
+      <text x="775" y="182" text-anchor="middle" font-size="10" fill="#1a6b3a">orientação nas decisões difíceis</text>
+      <text x="775" y="195" text-anchor="middle" font-size="10" fill="#1a6b3a">amparo nos momentos críticos</text>
+
+      <rect x="684" y="207" width="182" height="52" rx="8" fill="#fdf1f0" stroke="#f5c6c2" stroke-width="1"/>
+      <text x="775" y="226" text-anchor="middle" font-size="11" font-weight="600" fill="#c0392b">Vínculo enfraquecido</text>
+      <text x="775" y="241" text-anchor="middle" font-size="10" fill="#c0392b">quando o cuidado não chega</text>
+      <text x="775" y="254" text-anchor="middle" font-size="10" fill="#c0392b">o afastamento é silencioso</text>
+    </svg>
+
+    <!-- MARCELO CARD ABAIXO -->
+    <div style="margin-top:20px;background:var(--paper2);border-radius:10px;padding:16px 22px;display:flex;gap:32px;align-items:center;flex-wrap:wrap">
+      <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);flex-shrink:0">Marcelo, 38a — Líder de célula</div>
+      <div style="display:flex;gap:24px;flex-wrap:wrap;flex:1">
+        <div style="font-size:12px">🩺 Médico · 4–6h/semana para liderança</div>
+        <div style="font-size:12px">👥 18 membros sob seu cuidado</div>
+        <div style="font-size:12px">📱 WhatsApp como único canal</div>
+        <div style="font-size:12px">📋 Abandonou 3 apps por fricção</div>
+        <div style="font-size:12px">💳 <strong>Paga do próprio bolso</strong></div>
+      </div>
+      <div style="font-size:12px;color:var(--muted);font-style:italic;border-left:2px solid var(--accent);padding-left:14px;max-width:300px;line-height:1.6">"Ele não quer ser uma memória ambulante. Quer ser um líder presente — mas a vida não dá espaço."</div>
+    </div>
+  </div>
+
+  <!-- PULLQUOTE -->
+  <div class="pullquote">
+    <div class="pullquote-text">"O que tira pessoas da Igreja não é a teologia errada. É o dia em que alguém passou por um luto e ninguém ligou."</div>
+    <div class="pullquote-source">Pesquisa primária · 6 entrevistas em profundidade com líderes cristãos ativos — Discovery kAIrós 2026</div>
+  </div>
+
+  <!-- NÚMEROS DA CRISE -->
+  <div class="stat-band">
+    <div class="stat-item">
+      <div class="stat-val">80%</div>
+      <div class="stat-label">dos visitantes não voltam na segunda semana</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">50%</div>
+      <div class="stat-label">dos novos convertidos deixam a igreja em 2 anos</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val">62%</div>
+      <div class="stat-label">saíram sem brigar — sem dar sinal visível</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-val stat-val-small">1,2M+</div>
+      <div class="stat-label">líderes cristãos estimados — 400k igrejas × ao menos 3 líderes</div>
+    </div>
+  </div>
+
+  <!-- DORES DO MARCELO -->
+  <div style="margin:32px 0 16px">
+    <div style="font-size:11px;color:var(--muted);margin-top:8px;margin-bottom:4px">
+        Fontes: Barna Group · <em>Churchless</em> &amp; <em>The State of the Church</em> · barna.com &nbsp;·&nbsp; IBGE Censo 2022 · Datafolha 2023 · FGV CPDOC
+      </div>
+    <div class="chapter-eyebrow" style="margin-top:32px">As dores reais do Marcelo</div>
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-top:6px">Ele se importa. O problema<br>é que a vida não avisa na hora certa.</div>
+  </div>
+
+  <div class="pain-grid" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="pain-card">
+      <div class="pain-number">01</div>
+      <div class="pain-title">A memória que trai no pior momento</div>
+      <div class="pain-body">Maria perdeu a mãe em março. Marcelo soube, fez uma oração no grupo. Três semanas depois, ele pergunta animado: "Tudo bem, Maria?" — sem lembrar. Ela nota. E começa a se perguntar se realmente pertence àquela comunidade.<br><br>O mesmo acontece com o aniversário esquecido, o pedido de oração que ficou sem retorno, a conquista que ninguém celebrou. Coisas pequenas que, acumuladas, constroem a decisão de ir embora.</div>
+      <div class="pain-consequence">O afastamento começa no silêncio — não na briga.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-number">02</div>
+      <div class="pain-title">A mensagem certa no momento errado</div>
+      <div class="pain-body">Pedro acabou de ser demitido. Marcelo não sabe. Manda uma mensagem animada sobre a conferência de fim de ano: "Vai ser incrível, traz a família!" Pedro lê, coloca o celular de lado, começa a se afastar — silenciosamente.<br><br>Ou o oposto: há uma crise de fé, e Marcelo sente que precisa de uma abordagem fundamentada, uma passagem que dialogue com o que ela está vivendo. Ele sabe que existe — mas não sabe qual é.</div>
+      <div class="pain-consequence">Boa intenção com timing errado pode custar um membro.</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-number">03</div>
+      <div class="pain-title">O padrão que ninguém percebe — até ser tarde</div>
+      <div class="pain-body">Lucas faltou 3 vezes seguidas. Cada semana Marcelo pensa "vou ligar amanhã". Não liga. Na quarta falta, Lucas já tem um pé fora. Quando Marcelo finalmente percebe, qualquer contato vai parecer cobrança — não cuidado.<br><br>O afastamento virou fato consumado antes de ser detectado. E Marcelo carrega isso: a sensação de ter falhado com alguém que podia ter ajudado.</div>
+      <div class="pain-consequence">Intervenção tardia custa 3× mais esforço — e funciona menos.</div>
+    </div>
+  </div>
+
+  <!-- HIPÓTESES -->
+  <div style="margin:40px 0 16px">
+    <div class="chapter-eyebrow">Hipóteses — O que estamos testando</div>
+    <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;margin-top:6px">Antes de construir, precisamos saber<br>se as premissas são verdadeiras.</div>
+  </div>
+
+  <div class="hypo-list">
+    <div class="hypo">
+      <div class="hypo-num">H1</div>
+      <div>
+        <div class="hypo-q">Será que ajudar o líder a enviar a mensagem certa no momento certo melhora sua efetividade pastoral e retém mais membros?</div>
+        <div class="hypo-body">O kAIrós sugere a abordagem, o tom e o momento — Marcelo aprova ou edita. Nossa hipótese é que a consistência e o timing correto, mesmo que com sugestão de IA, criam vínculos mais fortes do que a ausência de contato.</div>
+      </div>
+      <div class="hypo-metric hm-pending">⏳ Validar no canary</div>
+    </div>
+    <div class="hypo">
+      <div class="hypo-num">H2</div>
+      <div>
+        <div class="hypo-q">Será que prever um score de risco de saída com base em dados contextuais e situacionais do membro dá mais assertividade ao líder?</div>
+        <div class="hypo-body">Combinando frequência de presença, tempo desde o último contato, eventos de vida e notas qualitativas do líder, o sistema gera um alerta antes que o afastamento se consolide. A hipótese é que intervenção precoce tem 3× mais efetividade que reengajamento tardio.</div>
+      </div>
+      <div class="hypo-metric hm-pending">⏳ Recall ≥ 85%</div>
+    </div>
+    <div class="hypo">
+      <div class="hypo-num">H3</div>
+      <div>
+        <div class="hypo-q">Será que líderes adotariam um produto que exige que eles insiram informações para receber ajuda — sem que isso pareça mais uma tarefa?</div>
+        <div class="hypo-body">O input é conversacional: Marcelo fala por áudio no WhatsApp. O sistema transcreve, extrai e estrutura. Nossa hipótese é que o custo de registro percebido é próximo de zero quando o canal é o WhatsApp e a interação é voz.</div>
+      </div>
+      <div class="hypo-metric hm-validated">✓ Validada — canal</div>
+    </div>
+  </div>
+
+</div><!-- /problem -->
+
+
+<!-- ═══════════════════════════════════════════
+     ABA 2 — A SOLUÇÃO
+═══════════════════════════════════════════ -->
+<div id="solution" class="section">
+
+  <div class="chapter">
+    <div class="chapter-eyebrow">Capítulo 2 de 5 — A Solução</div>
+    <div class="chapter-title">O kAIrós não substitui<br>o pastor. Dá <em>superpoderes</em><br>ao Marcelo.</div>
+    <div class="chapter-sub">Um assistente pastoral conversacional via WhatsApp. Ele sugere, Marcelo decide. Nenhuma mensagem chega ao membro sem aprovação humana.</div>
+  </div>
+
+  <!-- PROPOSTA DE VALOR — 3 RESULTADOS -->
+  <div class="chapter-eyebrow" style="margin-bottom:10px">Proposta de valor — 3 resultados esperados</div>
+  <div class="value-trio">
+    <div class="value-card">
+      <div class="value-icon vi-amber">⚡</div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Velocidade de resposta</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;justify-content:center">
+        <div style="font-size:13px;color:var(--muted);text-decoration:line-through">7+ dias</div>
+        <div style="font-size:20px;color:var(--muted)">→</div>
+        <div class="value-result" style="color:var(--amber)">&lt; 24h</div>
+      </div>
+      <div class="value-label">Da ausência na reunião ao toque pastoral do líder</div>
+      <div class="value-detail"><strong>Hoje:</strong> Marcelo percebe a ausência dias depois — quando já existe distância emocional. O sistema detecta no dia seguinte à reunião e entrega a mensagem sugerida pronta para aprovação.<br><br><strong>Por que importa:</strong> a janela de reengajamento mais efetiva é nas primeiras 48h. Depois disso, a abordagem começa a parecer cobrança.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon vi-blue">🎯</div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Assertividade pastoral</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;justify-content:center">
+        <div style="font-size:13px;color:var(--muted);text-decoration:line-through">intuição</div>
+        <div style="font-size:20px;color:var(--muted)">→</div>
+        <div class="value-result" style="color:var(--blue)">≥ 85%</div>
+      </div>
+      <div class="value-label">Recall de risco — membros em risco identificados antes de sair</div>
+      <div class="value-detail"><strong>Hoje:</strong> Marcelo opera no escuro — percebe o afastamento quando o membro já decidiu. Sem dados, depende de memória e intuição para 18 pessoas simultâneas.<br><br><strong>Por que importa:</strong> 62% dos que saíram não avisaram. Um <strong>score de churn</strong> que chega antes do ponto de não-retorno muda esse número.</div>
+    </div>
+    <div class="value-card">
+      <div class="value-icon vi-green">✉️</div>
+      <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px">Confiança na sugestão</div>
+      <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px;justify-content:center">
+        <div style="font-size:13px;color:var(--muted);text-decoration:line-through">0%</div>
+        <div style="font-size:20px;color:var(--muted)">→</div>
+        <div class="value-result" style="color:var(--green)">≥ 60%</div>
+      </div>
+      <div class="value-label">Mensagens aprovadas sem edição substancial pelo líder</div>
+      <div class="value-detail"><strong>Hoje:</strong> Marcelo escreve tudo do zero — quando escreve. O custo de elaborar uma mensagem personalizada, no tom certo, com a fundamentação certa é alto o suficiente para adiar ou não fazer.<br><br><strong>Por que importa:</strong> se o líder aprovar 6 em 10 sugestões sem editar, o esforço de cuidado pastoral cai radicalmente.</div>
+    </div>
+  </div>
+
+  <!-- MVP FEATURES -->
+  <div class="chapter-eyebrow" style="margin-bottom:10px;margin-top:32px">MVP — Features e status</div>
+  <div class="card">
+    <table class="mvp-table">
+      <thead>
+        <tr>
+          <th style="width:28%">Feature</th>
+          <th style="width:38%">O que faz</th>
+          <th style="width:20%">Critério de entrega</th>
+          <th style="width:14%">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="done">
+          <td><strong>Cadastro conversacional</strong></td>
+          <td>Marcelo fala por áudio: nome, aniversário, eventos de vida. Sistema transcreve e estrutura.</td>
+          <td>Cadastro por áudio &lt; 90s</td>
+          <td><span class="tag tag-done">✓ Ciclo 1</span></td>
+        </tr>
+        <tr class="done">
+          <td><strong>Score de risco</strong></td>
+          <td>Camada 1 determinística + LLM Judge qualitativo. Retorna vermelho/amarelo/verde com justificativa.</td>
+          <td>5/5 evals · recall ≥ 85%</td>
+          <td><span class="tag tag-done">✓ Ciclo 1</span></td>
+        </tr>
+        <tr class="done">
+          <td><strong>Roteiro pastoral com RAG</strong></td>
+          <td>Busca vetorial em 6.704 perícopes ARA + estatuto. Nunca inventa versículo.</td>
+          <td>Anti-alucinação validado</td>
+          <td><span class="tag tag-done">✓ Ciclo 1</span></td>
+        </tr>
+        <tr class="cycle2">
+          <td><strong>Alerta de ausência</strong></td>
+          <td>3h após reunião: quem não veio? Gera mensagem de toque pastoral calibrada ao número de faltas e ao contexto do membro.</td>
+          <td>Prompt OCANES · TPR 100%</td>
+          <td><span class="tag tag-c2">→ Ciclo 2</span></td>
+        </tr>
+        <tr class="cycle2">
+          <td><strong>Relatório semanal</strong></td>
+          <td>Segunda às 8h: top 3–5 membros que precisam de atenção, com sugestão de abordagem em 2 frases por membro.</td>
+          <td>Relatório enviado via WPP</td>
+          <td><span class="tag tag-c2">→ Ciclo 2</span></td>
+        </tr>
+        <tr class="cycle2">
+          <td><strong>Mensagem de aniversário</strong></td>
+          <td>D-1 às 20h: prévia personalizada com histórico real. Marcelo aprova ou edita. Nunca automático.</td>
+          <td>Aprovação humana obrigatória</td>
+          <td><span class="tag tag-c2">→ Ciclo 2</span></td>
+        </tr>
+        <tr>
+          <td><strong>Integração WhatsApp</strong></td>
+          <td>Meta Business API aprovada. Templates de utilidade. n8n webhook conectado.</td>
+          <td>Relatório sendo enviado real</td>
+          <td><span class="tag tag-c2">→ Ciclo 2</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="note">⚡ <strong>Princípio inegociável:</strong> Nenhuma mensagem chega ao membro sem aprovação explícita do líder. O kAIrós é um copiloto — o Marcelo é sempre o piloto.</div>
+      <div class="note" style="margin-top:8px;border-color:var(--green-border);background:var(--green-bg)">📖 <strong>RAG bíblico controlado:</strong> 6.704 perícopes da Bíblia ARA indexadas em pgvector. O kAIrós nunca inventa um versículo — só recupera passagens reais do corpus controlado.</div>
+  </div>
+
+  <!-- MÉTRICAS SEPARADAS -->
+  <div class="chapter-eyebrow" style="margin-bottom:10px;margin-top:32px">Métricas — Produto vs. Negócio</div>
+  <div class="metrics-split">
+    <div class="card">
+      <div class="metric-group-title">Qualidade do produto — o sistema funciona?</div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Recall de risco</div>
+          <div class="metric-sub">alertas que captam membros em risco real</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--green)">≥ 85%</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Variância do score</div>
+          <div class="metric-sub">mesmos inputs = mesmo resultado</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--blue)">&lt; 5%</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Latência p50 / p95</div>
+          <div class="metric-sub">tempo de resposta no WhatsApp</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--blue)">3s / 6s</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">TPR dos prompts OCANES</div>
+          <div class="metric-sub">mensagens que cumprem todas as normas</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--green)">100%</div>
+          <div style="font-size:10px;color:var(--muted)">validado v3-revised</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Aprovação de msg sem edição</div>
+          <div class="metric-sub">confiança do líder na sugestão</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--green)">≥ 60%</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Descarte de mensagem</div>
+          <div class="metric-sub">líder rejeita a sugestão completamente</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--amber)">≤ 10%</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="metric-group-title">Sucesso do negócio — Marcelo adota e paga?</div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">WTP validado</div>
+          <div class="metric-sub">Marcelo paga R$ 29,90 do bolso</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--amber)">⏳ Pendente</div>
+          <div style="font-size:10px;color:var(--muted)">validar no canary</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Conversão free → pago</div>
+          <div class="metric-sub">em 60–90 dias de uso</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--purple)">≥ 15%</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Churn mensal</div>
+          <div class="metric-sub">sem dados reais — hipótese</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--muted)">h: &lt; 5%</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Retorno pós-alerta</div>
+          <div class="metric-sub">membro voltou após toque do líder</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--green)">≥ 40%</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Ação sobre relatório</div>
+          <div class="metric-sub">líder tocou ≥ 1 membro do top N</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--green)">≥ 60%</div>
+        </div>
+      </div>
+      <div class="metric-row">
+        <div>
+          <div class="metric-name">Feedback "útil"</div>
+          <div class="metric-sub">botão útil/não útil por mensagem</div>
+        </div>
+        <div style="text-align:right">
+          <div class="metric-target" style="color:var(--green)">≥ 70%</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /solution -->
+
+
+<!-- ═══════════════════════════════════════════
+     ABA 3 — P&L
+═══════════════════════════════════════════ -->
+<div id="pnl" class="section">
+
+  <div class="chapter">
+    <div class="chapter-eyebrow">Capítulo 3 de 5 — Modelo Financeiro</div>
+    <div class="chapter-title">Custo real, margem real.<br><em>Sem ilusão.</em></div>
+    <div class="chapter-sub">Premissa: 15–20 membros, ~150 mensagens/mês por líder, 80% por áudio, 45s médio. Custo calculado bottom-up, não estimado.</div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <div class="card-eyebrow">Custo por líder / mês — breakdown</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">Premissas: Claude Sonnet (60 msgs pastorais) · Haiku (240 msgs classifier+cadastro) · LLM Judge (8 avaliações/mês) · Whisper OpenAI · WhatsApp Business API · Supabase + n8n rateados</div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--blue);margin-bottom:10px">🤖 Custo de IA — R$ 3,30</div>
+      <div class="row"><div style="display:flex;justify-content:space-between"><span>Claude Sonnet — agente pastoral</span><strong>R$ 2,50</strong></div><div style="font-size:11px;color:var(--muted)">60 msgs × 3.800t × $3/MTok</div></div>
+      <div class="row"><div style="display:flex;justify-content:space-between"><span>Claude Haiku — classifier + cadastro</span><strong>R$ 0,66</strong></div><div style="font-size:11px;color:var(--muted)">240 msgs × ~1.000t × $0,80/MTok</div></div>
+      <div class="row"><div style="display:flex;justify-content:space-between"><span>LLM Judge — score de risco</span><strong>R$ 0,14</strong></div><div style="font-size:11px;color:var(--muted)">8 avaliações × 963t × $3/MTok</div></div>
+
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--amber);margin:16px 0 10px">📦 Operação adicional — R$ 6,95</div>
+      <div class="row"><div style="display:flex;justify-content:space-between"><span>Whisper — transcrição de áudio</span><strong style="color:var(--red)">R$ 3,20</strong></div><div style="font-size:11px;color:var(--muted)">120 áudios × 45s = 90min × $0,006/min</div></div>
+      <div class="row"><div style="display:flex;justify-content:space-between"><span>WhatsApp Business API</span><strong>R$ 2,75</strong></div><div style="font-size:11px;color:var(--muted)">~30 conversas iniciadas × $0,05</div></div>
+      <div class="row"><div style="display:flex;justify-content:space-between"><span>Supabase + n8n (rateado)</span><strong>R$ 1,00</strong></div><div style="font-size:11px;color:var(--muted)">Infra compartilhada entre líderes</div></div>
+
+      <div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:16px;padding-top:14px;border-top:2px solid var(--ink);font-family:'Playfair Display',serif;font-size:16px;font-weight:700"><span>Custo total por líder/mês</span><span style="color:var(--red)">R$ 10,25</span></div>
+
+      <div class="note">⚡ <strong>Maior alavanca:</strong> trocar Whisper OpenAI pelo Groq Whisper (~5× mais barato). Economiza ~R$ 2,60/líder/mês. Margem sobe de 66% → ~80% no plano Essencial.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-eyebrow">P&L por plano — por líder incluído</div>
+      <table class="pl-table">
+        <thead>
+          <tr><th>Item</th><th>Gratuito</th><th>Essencial</th><th>Pastoral</th></tr>
+        </thead>
+        <tbody>
+          <tr class="pl-head"><td colspan="4">Receita</td></tr>
+          <tr><td>Mensalidade/líder</td><td>R$ 0</td><td class="num-green" style="font-weight:500">R$ 29,90</td><td class="num-blue" style="font-weight:500">R$ 40</td></tr>
+          <tr style="color:var(--muted);font-size:12px"><td>Base mínima</td><td>—</td><td>—</td><td>R$ 200 (5 líderes)</td></tr>
+          <tr class="pl-head"><td colspan="4">Custo por líder</td></tr>
+          <tr><td>Custo IA</td><td style="color:var(--muted)">R$ 0,50</td><td>R$ 3,30</td><td>R$ 3,30</td></tr>
+          <tr><td>Whisper + infra</td><td style="color:var(--muted)">R$ 1,10</td><td>R$ 6,95</td><td>R$ 6,95</td></tr>
+          <tr class="pl-total"><td>Custo total</td><td class="num-red">R$ 1,60</td><td class="num-red">R$ 10,25</td><td class="num-red">R$ 10,25</td></tr>
+          <tr class="pl-head"><td colspan="4">Resultado</td></tr>
+          <tr class="pl-margin"><td>Margem/líder</td><td class="num-red">−R$ 1,60</td><td class="num-green">R$ 19,65</td><td class="num-green">R$ 29,75</td></tr>
+          <tr style="font-size:13px;color:var(--muted)"><td>% margem</td><td class="num-red">—</td><td class="num-green" style="font-weight:500">66%</td><td class="num-green" style="font-weight:500">74%</td></tr>
+        </tbody>
+      </table>
+      <div style="margin-top:16px;font-size:11px;color:var(--muted);padding-top:12px;border-top:1px solid var(--border)">Pastoral Pro removido desta versão — em reavaliação de escopo antes de apresentar ao time.</div>
+    </div>
+  </div>
+
+  <div class="chapter-eyebrow" style="margin:32px 0 10px">Projeção de receita — 3 cenários</div>
+  <div class="card">
+    <table class="pl-table">
+      <thead>
+        <tr><th>Cenário</th><th>Escala</th><th>Mix</th><th>MRR</th><th>Custo/mês</th><th>Margem</th><th>ARR</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="tag" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-border)">Conservador</span></td>
+          <td>100 líderes · 5 igrejas Pastoral</td>
+          <td style="font-size:12px">80% Essencial · 20% Pastoral</td>
+          <td style="font-weight:500">R$ 4.392</td>
+          <td class="num-red">R$ 1.281</td>
+          <td class="num-green" style="font-weight:500">71%</td>
+          <td style="font-weight:500">R$ 52.704</td>
+        </tr>
+        <tr>
+          <td><span class="tag" style="background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)">Base</span></td>
+          <td>300 líderes · 15 igrejas</td>
+          <td style="font-size:12px">70% Essencial · 30% Pastoral</td>
+          <td style="font-weight:500">R$ 14.250</td>
+          <td class="num-red">R$ 3.705</td>
+          <td class="num-green" style="font-weight:500">74%</td>
+          <td style="font-weight:500">R$ 171.000</td>
+        </tr>
+        <tr>
+          <td><span class="tag" style="background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)">Otimista</span></td>
+          <td>800 líderes · 30 igrejas</td>
+          <td style="font-size:12px">60% Essencial · 40% Pastoral</td>
+          <td style="font-weight:500">R$ 40.240</td>
+          <td class="num-red">R$ 10.250</td>
+          <td class="num-green" style="font-weight:500">74%</td>
+          <td style="font-weight:500">R$ 482.880</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div><!-- /pnl -->
+
+
+<!-- ═══════════════════════════════════════════
+     ABA 4 — PLANOS
+═══════════════════════════════════════════ -->
+<div id="pricing" class="section">
+
+  <div class="chapter">
+    <div class="chapter-eyebrow">Capítulo 4 de 5 — Precificação</div>
+    <div class="chapter-title">Simples. Três planos.<br><em>Sem overselling.</em></div>
+    <div class="chapter-sub">A diferença entre os planos não é lista de features — é nível de automação e visibilidade. O Marcelo não precisa de mais do que o Essencial para sentir o produto funcionar.</div>
+  </div>
+
+  <div class="plan-row">
+
+    <!-- GRATUITO -->
+    <div class="plan">
+      <div class="plan-tier" style="color:var(--muted)">B2C — Experimentar</div>
+      <div class="plan-name">Gratuito</div>
+      <div class="plan-desc">Marcelo experimenta o produto sem compromisso. Sente o valor antes de pagar.</div>
+      <div class="plan-price" style="color:var(--green)">R$ 0</div>
+      <div class="plan-cap">1 líder · até 10 membros · 30 msgs/mês</div>
+      <div class="plan-features">
+        <div class="pf"><span class="pf-check">✓</span>Cadastro por áudio e texto</div>
+        <div class="pf"><span class="pf-check">✓</span>3 roteiros pastorais/mês com RAG bíblico</div>
+        <div class="pf"><span class="pf-check">✓</span>Score de risco básico (visual)</div>
+        <div class="pf"><span class="pf-check">✓</span>Histórico de membros</div>
+        <div class="pf"><span class="pf-x">✗</span>Alertas de ausência</div>
+        <div class="pf"><span class="pf-x">✗</span>Relatório semanal automático</div>
+        <div class="pf"><span class="pf-x">✗</span>Mensagem de aniversário</div>
+      </div>
+      <div class="plan-margin" style="background:var(--amber-bg);color:var(--amber)">CAC implícito ~ R$ 10,67</div>
+    </div>
+
+    <!-- ESSENCIAL -->
+    <div class="plan featured">
+      <div class="plan-badge">mais popular</div>
+      <div class="plan-tier" style="color:var(--ink)">B2C — Dia a dia</div>
+      <div class="plan-name">Essencial</div>
+      <div class="plan-desc">Marcelo no controle total. O produto faz a memória, ele faz o cuidado.</div>
+      <div class="plan-price"><sup>R$</sup>29<sup style="font-size:15px">,90</sup><sub>/mês</sub></div>
+      <div class="plan-cap">1 líder · membros ilimitados · msgs ilimitadas</div>
+      <div class="plan-features">
+        <div class="pf"><span class="pf-check">✓</span>Tudo do Gratuito, sem limites</div>
+        <div class="pf"><span class="pf-check">✓</span>Roteiros pastorais ilimitados</div>
+        <div class="pf"><span class="pf-check">✓</span>Alertas de ausência com mensagem sugerida</div>
+        <div class="pf"><span class="pf-check">✓</span>Relatório semanal (segunda às 8h)</div>
+        <div class="pf"><span class="pf-check">✓</span>Mensagem de aniversário personalizada</div>
+        <div class="pf"><span class="pf-check">✓</span>Score de risco completo + LLM Judge</div>
+        <div class="pf"><span class="pf-check">✓</span>Histórico completo com linha do tempo</div>
+      </div>
+      <div class="plan-margin" style="background:var(--green-bg);color:var(--green)">Margem 66% · LTV:CAC ~33×</div>
+    </div>
+
+    <!-- PASTORAL -->
+    <div class="plan">
+      <div class="plan-tier" style="color:var(--blue)">Grupo — Pastor + Líderes</div>
+      <div class="plan-name">Pastoral</div>
+      <div class="plan-desc">Para o pastor que quer visão consolidada de todos os grupos da célula.</div>
+      <div class="plan-price" style="color:var(--blue)"><sup style="color:var(--blue)">R$</sup>40<sub>/líder/mês</sub></div>
+      <div class="plan-cap">Mínimo 5 líderes · R$ 200/mês · membros ilimitados</div>
+      <div class="plan-features">
+        <div class="pf"><span class="pf-check">✓</span>Tudo do Essencial para cada líder</div>
+        <div class="pf"><span class="pf-check">✓</span>Dashboard do pastor — visão de todos os grupos</div>
+        <div class="pf"><span class="pf-check">✓</span>Relatório consolidado por grupo</div>
+        <div class="pf"><span class="pf-check">✓</span>Alertas centralizados para o pastor</div>
+        <div class="pf"><span class="pf-check">✓</span>Faturamento unificado</div>
+        <div class="pf"><span class="pf-x">✗</span>Captação automática de dados</div>
+        <div class="pf"><span class="pf-x">✗</span>Integração CRM via API</div>
+      </div>
+      <div class="plan-margin" style="background:var(--blue-bg);color:var(--blue)">Margem 74% · +R$ 40/líder adicional</div>
+    </div>
+
+  </div>
+
+  <!-- UPGRADE FLOW -->
+  <div class="chapter-eyebrow" style="margin-bottom:12px">Lógica de upgrade</div>
+  <div class="upgrade-flow">
+    <div class="uf-node">
+      <div class="uf-plan">Gratuito</div>
+      <div class="uf-trigger"><strong>Gatilho natural</strong>Bate no limite de 10 membros ou 30 msgs. O produto já gerou valor — ele viu o primeiro roteiro funcionar.</div>
+    </div>
+    <div class="uf-arrow">→</div>
+    <div class="uf-node" style="background:var(--paper2)">
+      <div class="uf-plan">Essencial</div>
+      <div class="uf-trigger"><strong>Gatilho natural</strong>3+ líderes da mesma célula usam o Essencial. O pastor percebe e quer visão consolidada.</div>
+    </div>
+    <div class="uf-arrow">→</div>
+    <div class="uf-node">
+      <div class="uf-plan">Pastoral</div>
+      <div class="uf-trigger"><strong>Gatilho natural</strong>A coordenação é o valor. Faturamento unificado facilita a decisão institucional.</div>
+    </div>
+  </div>
+
+  <!-- FREEMIUM MATH -->
+  <div class="chapter-eyebrow" style="margin-bottom:12px;margin-top:28px">Lógica do freemium</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center">
+      <div style="padding:20px;border-right:1px solid var(--border)">
+        <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--purple)">100</div>
+        <div style="font-size:12px;font-weight:500;margin:6px 0 4px">líderes no free</div>
+        <div style="font-size:11px;color:var(--muted)">Eventos de igreja + indicação orgânica</div>
+      </div>
+      <div style="padding:20px;border-right:1px solid var(--border)">
+        <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--amber)">R$ 160</div>
+        <div style="font-size:12px;font-weight:500;margin:6px 0 4px">custo/mês</div>
+        <div style="font-size:11px;color:var(--muted)">R$ 1,60 × 100 — investimento em aquisição</div>
+      </div>
+      <div style="padding:20px;border-right:1px solid var(--border)">
+        <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--blue)">15</div>
+        <div style="font-size:12px;font-weight:500;margin:6px 0 4px">convertem (15%)</div>
+        <div style="font-size:11px;color:var(--muted)">Em 60–90 dias após sentir o valor real</div>
+      </div>
+      <div style="padding:20px">
+        <div style="font-family:'Playfair Display',serif;font-size:36px;font-weight:900;color:var(--green)">R$ 449</div>
+        <div style="font-size:12px;font-weight:500;margin:6px 0 4px">MRR gerado</div>
+        <div style="font-size:11px;color:var(--muted)">15 × R$ 29,90 · ROI 2,8× sobre custo free</div>
+      </div>
+    </div>
+    <div style="padding:12px 20px;background:var(--paper2);border-top:1px solid var(--border);font-size:11px;color:var(--muted);border-radius:0 0 13px 13px">
+      CAC implícito: R$ 160 / 15 = <strong style="color:var(--ink)">R$ 10,67 por líder convertido</strong> · LTV estimado 12 meses = R$ 358,80 · LTV:CAC = <strong style="color:var(--ink)">~33,6×</strong>
+    </div>
+  </div>
+
+</div><!-- /pricing -->
+
+
+<!-- ═══════════════════════════════════════════
+     ABA 5 — GTM
+═══════════════════════════════════════════ -->
+<div id="gtm" class="section">
+
+  <div class="chapter">
+    <div class="chapter-eyebrow">Capítulo 5 de 5 — Go-to-Market</div>
+    <div class="chapter-title">Orgânico dentro<br>do ecossistema. <em>Sem ads.</em></div>
+    <div class="chapter-sub">Confiança no contexto espiritual não se compra com interrupção. Nossa estratégia não usa ads. Crescimento via eventos presenciais, freemium e boca a boca entre líderes cristãos.</div>
+  </div>
+
+  <div class="gtm-grid">
+
+    <div class="gtm-phase">
+      <div class="gtm-head">
+        <div class="gtm-phase-name">Fase 1 — Canary</div>
+        <div class="gtm-phase-meta">Agora · 6 semanas · Validação controlada</div>
+      </div>
+      <div class="gtm-body">
+        <div class="gtm-section-label">Meta</div>
+        <div class="gtm-item">Recall ≥ 85% com dados reais · Validar WTP do Marcelo</div>
+        <div class="gtm-section-label">Como</div>
+        <div class="gtm-item"><strong>10 líderes cristãos</strong> em validação controlada</div>
+        <div class="gtm-item">Engajamento — Marcelo volta a usar?</div>
+        <div class="gtm-item">Acurácia do score ≥ 85% com dados reais</div>
+        <div class="gtm-section-label">O que validar</div>
+        <div class="gtm-item">Valor percebido — WTP R$ 29,90?</div>
+        <div class="gtm-item">Latência p50 ≤ 3s no WhatsApp real</div>
+        <div class="gtm-item">Score com dados reais — ajustar pesos</div>
+        <div class="gtm-section-label">Entregável</div>
+        <div class="gtm-item">Relatório com 2 semanas de dados reais</div>
+        <div class="gtm-item">Decisão: ir para beta ou ajustar</div>
+      </div>
+    </div>
+
+    <div class="gtm-phase">
+      <div class="gtm-head">
+        <div class="gtm-phase-name">Fase 2 — Beta</div>
+        <div class="gtm-phase-meta">Próxima · 2–3 meses · Early adopters</div>
+      </div>
+      <div class="gtm-body">
+        <div class="gtm-section-label">Meta</div>
+        <div class="gtm-item">50–200 líderes pagantes</div>
+        <div class="gtm-section-label">Aquisição</div>
+        <div class="gtm-item"><strong>Conferências de líderes</strong> — demo ao vivo, onboarding na hora</div>
+        <div class="gtm-item"><strong>Testemunho</strong> dos líderes do canary — prova social real</div>
+        <div class="gtm-item"><strong>Grupos de WhatsApp</strong> de líderes — viral natural</div>
+        <div class="gtm-item">Indicação: líder convida líder → ambos ganham 1 mês</div>
+        <div class="gtm-section-label">Conversão</div>
+        <div class="gtm-item">Free trial 30 dias via QR code em evento</div>
+        <div class="gtm-item">Onboarding conversacional em 60 segundos</div>
+        <div class="gtm-item">Primeiro roteiro pastoral nos primeiros 5 min</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- CAC E INVESTIMENTO -->
+  <div class="chapter-eyebrow" style="margin-bottom:12px;margin-top:8px">Investimento e impacto no CAC</div>
+  <div class="card">
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:0">
+      <div style="padding:20px;border-right:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:12px">Canary (sem investimento)</div>
+        <div class="row" style="font-size:12px"><div style="display:flex;justify-content:space-between"><span>Custo free (5 líderes)</span><span>~R$ 8/mês</span></div></div>
+        <div class="row" style="font-size:12px"><div style="display:flex;justify-content:space-between"><span>Infra + n8n + Claude</span><span>~R$ 80/mês</span></div></div>
+        <div class="row" style="font-size:12px;border-bottom:none"><div style="display:flex;justify-content:space-between;font-weight:500"><span>CAC (se 1 converter)</span><span style="color:var(--green)">~R$ 88</span></div></div>
+      </div>
+      <div style="padding:20px;border-right:1px solid var(--border)">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:12px">Beta (com investimento mínimo)</div>
+        <div class="row" style="font-size:12px"><div style="display:flex;justify-content:space-between"><span>Custo free (100 líderes)</span><span>R$ 160/mês</span></div></div>
+        <div class="row" style="font-size:12px"><div style="display:flex;justify-content:space-between"><span>Presença em 2 eventos</span><span>~R$ 600 (único)</span></div></div>
+        <div class="row" style="font-size:12px;border-bottom:none"><div style="display:flex;justify-content:space-between;font-weight:500"><span>CAC médio (15% conv.)</span><span style="color:var(--amber)">~R$ 50</span></div></div>
+      </div>
+      <div style="padding:20px">
+        <div style="font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:12px">Escala (freemium rodando)</div>
+        <div class="row" style="font-size:12px"><div style="display:flex;justify-content:space-between"><span>Custo free (rateado)</span><span>R$ 1,60/líder</span></div></div>
+        <div class="row" style="font-size:12px"><div style="display:flex;justify-content:space-between"><span>CAC implícito freemium</span><span>R$ 10,67</span></div></div>
+        <div class="row" style="font-size:12px;border-bottom:none"><div style="display:flex;justify-content:space-between;font-weight:500"><span>LTV:CAC Essencial</span><span style="color:var(--green)">~33×</span></div></div>
+      </div>
+    </div>
+    <div class="note" style="margin-top:0;border-radius:0 0 13px 13px;border-top:1px solid var(--amber-border)"><strong>Observação:</strong> O CAC real inclui tempo do time (canary e beta são custo de produto, não de marketing). Investimento em eventos presenciais tem alto retorno no contexto cristão — confiança se constrói pessoalmente antes de se escalar digitalmente.</div>
+  </div>
+
+  <!-- POSICIONAMENTO -->
+  <div class="chapter-eyebrow" style="margin-bottom:12px;margin-top:36px">Validação de negócio — MRR esperado por fase</div>
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:36px">
+    <div style="padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--paper2)">
+      <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px">Fase 1 · Canary</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Sem campanha de aquisição</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin-bottom:3px">MRR previsto</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--muted);line-height:1">R$ 0</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">10 líderes · validação gratuita</div>
+    </div>
+    <div style="padding:16px;border:2px solid var(--accent);border-radius:10px;background:var(--green-bg)">
+      <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--accent);font-weight:700;margin-bottom:6px">Fase 2 · Beta ★</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Campanha: R$ 10k</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin-bottom:3px">MRR previsto</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--green);line-height:1">R$ 897</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">30 pagantes × R$ 29,90</div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--paper2)">
+      <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px">Fase 3 · Escala M1</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Campanha: R$ 10k</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin-bottom:3px">MRR previsto</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--green);line-height:1">R$ 2.691</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">90 pagantes × R$ 29,90</div>
+    </div>
+    <div style="padding:16px;border:1px solid var(--border);border-radius:10px;background:var(--paper2)">
+      <div style="font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);font-weight:600;margin-bottom:6px">Fase 4 · Escala M4</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:10px">Campanha: R$ 20k</div>
+      <div style="font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;margin-bottom:3px">MRR previsto</div>
+      <div style="font-family:'Playfair Display',serif;font-size:24px;font-weight:900;color:var(--green);line-height:1">R$ 59.800</div>
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">2.000 pagantes × R$ 29,90 · ARR: R$ 717k</div>
+    </div>
+  </div>
+  <div class="chapter-eyebrow" style="margin-bottom:12px;margin-top:28px">Posicionamento</div>
+  <div class="position-grid">
+    <div class="card">
+      <div class="card-eyebrow">O que NÃO somos</div>
+      <div class="pos-item" style="color:var(--red)">✗ ERP ou sistema de gestão de igreja</div>
+      <div class="pos-item" style="color:var(--red)">✗ IA que substitui o pastor ou o líder</div>
+      <div class="pos-item" style="color:var(--red)">✗ App de oração ou conteúdo bíblico</div>
+      <div class="pos-item" style="color:var(--red)">✗ Solução que envia mensagens automáticas</div>
+      <div class="pos-item" style="color:var(--red)">✗ CRM corporativo adaptado para igrejas</div>
+    </div>
+    <div class="card">
+      <div class="card-eyebrow">O que somos</div>
+      <div class="pos-item" style="color:var(--green)">✓ Copiloto do Marcelo — ele sempre no controle</div>
+      <div class="pos-item" style="color:var(--green)">✓ Memória pastoral infinita no WhatsApp</div>
+      <div class="pos-item" style="color:var(--green)">✓ Proatividade estruturada sem fricção</div>
+      <div class="pos-item" style="color:var(--green)">✓ IA bíblica — só fontes controladas, sem alucinação</div>
+      <div class="pos-item" style="color:var(--green)">✓ Zero app novo — canal onde o líder já está</div>
+    </div>
+  </div>
+
+</div><!-- /gtm -->
+
+<div class="footer">KAIrós · Product Canvas v4.0 · Mai 2026 · Confidencial — uso interno do time</div>
+
+<script>
+function show(id,btn){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
